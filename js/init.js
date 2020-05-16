@@ -144,8 +144,16 @@
         }
     }
 
+    function initialize_cookies() {
+        $.cookie.json = true;
+        $.cookie.defaults.expires = 5000;
+
+        restore_bookmarks_and_last_requests();
+    }
+
     function init_all() {
         read_db();
+        initialize_cookies();
         initialize_ace();
         init_materialize();
         initialize_alertify_properties();

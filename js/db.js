@@ -4,16 +4,41 @@ var db = {
       origin: "localhost:8080",
       route: "performAction/initParams",
       type: "POST",
-      default_json: JSON.stringify({
+      default_json: {
         test: "test"
-      }, null, 2)
+      }
     }, {
       origin: "https://materializecss.com/text-inputs.html",
       route: "Experimental",
       type: "GET",
-      default_json: JSON.stringify({
+      default_json: {
         test: "test"
-      }, null, 2)
+      }
+    }, {
+      origin: "localhost:8080",
+      route: "SuccessExample",
+      type: "POST",
+      default_json: {}
+    }, {
+      origin: "localhost:8080",
+      route: "SuccessExample",
+      type: "GET",
+      default_json: {}
+    }, {
+      origin: "localhost:8080",
+      route: "BadRequest",
+      type: "GET",
+      default_json: {}
+    }, {
+      origin: "localhost:8080",
+      route: "GeneralError",
+      type: "POST",
+      default_json: {}
+    }, {
+      origin: "localhost:8080",
+      route: "CloseServer",
+      type: "POST",
+      default_json: {}
     }
   ]
 };

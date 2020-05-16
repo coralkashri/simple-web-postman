@@ -23,6 +23,7 @@
     <script type="text/javascript" src="resources/js/alertify.js"></script>
     <script type="text/javascript" src="resources/js/moment.min.js"></script>
     <script type="text/javascript" src="resources/js/ace/src-min-noconflict/ace.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
 
     <!--Custom-->
     <!--Styles-->
@@ -86,11 +87,14 @@
     <!--Side NavBar-->
     <ul id="slide-out" class="sidenav left-aligned flow-text">
         <li>
-            <a href="index.html"><i class="fa fa-envelope"></i>Postman</a>
+            <div style="display: flex; align-items: center;" class="user-view"></div>
         </li>
         <li>
-            <a href="admin_panel.html"><i class="fa fa-toolbox"></i>Admin Panel</a>
+            <a href="index.html"><i class="fa fa-envelope"></i>Postman</a>
         </li>
+        <!--<li>
+            <a href="admin_panel.html"><i class="fa fa-toolbox"></i>Admin Panel</a>
+        </li>-->
     </ul>
 
     <!--Top NavBar-->
@@ -146,8 +150,30 @@
         </div>
     </div>
 
-    <div class="row">
-        <div id="ace-editor" class='col offset-s1 s10 ace-editor'></div>
+    <div class="row center">
+        <div class="col s12">
+            <!--Last Requests-->
+            <div class="row col l3 s12">
+                <div class="col s12">
+                    <b>Last Requests</b>
+                    <ul id="last_requests_list">
+
+                    </ul>
+                </div>
+
+                <!--Bookmarks-->
+                <div class="col s12">
+                    <b>Bookmarks</b>
+                    <ul id="bookmarks_list">
+
+                    </ul>
+                </div>
+            </div>
+
+            <!--JSON-->
+            <div class="col s1 show-on-medium-and-down hide-on-large-only"></div>
+            <div id="ace-editor" class='col s10 l8 ace-editor'></div>
+        </div>
     </div>
 
     <div class="row">
