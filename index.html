@@ -30,6 +30,89 @@
     <title>Postman</title>
 </head>
 <body>
-    <div id="ace-editor" class='ace-editor'></div>
+    <!--NavBar-->
+    <div class="dismiss_area"></div>
+
+    <!--Preloader-->
+    <div class="preloader-wrapper big circular-preloader">
+        <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+
+        <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+
+        <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+    </div>
+
+    <!--Side NavBar-->
+    <ul id="slide-out" class="sidenav left-aligned flow-text">
+        <li>
+            <a href="index.html"><i class="fa fa-envelope"></i>Postman</a>
+        </li>
+        <li>
+            <a href="admin_panel.html"><i class="fa fa-toolbox"></i>Admin Panel</a>
+        </li>
+    </ul>
+
+    <!--Top NavBar-->
+    <div id="page_sticky_header" class="sticky-action">
+        <div class="row" ng-hide="version_edit_progress.is_active">
+            <div style="position: fixed; margin-left: 1rem;" class="left" id="side-nav-button">
+                <a href="#" data-target="slide-out" class="sidenav-trigger">
+                    <div class="menu-icon-2">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </div>
+
+            <span class="hide-on-med-and-down">
+                <div class="col s10 offset-s1 center">
+                    <a style="font-size: 43px;" href="/index.html">Postman</a>
+                </div>
+            </span>
+        </div>
+        <div class="nav-content">
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div id="ace-editor" class='col s12 ace-editor'></div>
+    </div>
 </body>
 </html>
