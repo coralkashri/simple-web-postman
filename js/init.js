@@ -16,7 +16,7 @@
             }
         });
 
-        var editor = ace.edit("ace-editor");
+        editor = ace.edit("ace-editor");
         editor.setTheme("ace/theme/chrome");
         editor.session.setMode("ace/mode/json");
         editor.session.setOptions({
@@ -137,7 +137,15 @@
         });
     }
 
+    function read_db() {
+        let select_tag = $("#request_route");
+        for (let i = 0; i < db.routes.length; i++) {
+            select_tag.append("<option value='" + i + "'>" + db.routes[i].route + "</option>")
+        }
+    }
+
     function init_all() {
+        read_db();
         initialize_ace();
         init_materialize();
         initialize_alertify_properties();
