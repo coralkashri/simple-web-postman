@@ -153,19 +153,25 @@
     <div class="row center">
         <div class="col s12">
             <!--Last Requests-->
-            <div class="row col l3 s12">
+            <div class="row col s12 l3">
                 <div class="col s12">
-                    <b>Last Requests</b>
-                    <ul id="last_requests_list">
-
+                    <ul class="tabs">
+                        <li class="tab col s6"><a href="#last_requests_list">Last Requests</a></li>
+                        <li class="tab col s6"><a class="active" href="#bookmarks_tab">Bookmarks</a></li>
                     </ul>
+                    <br>
                 </div>
-
-                <!--Bookmarks-->
-                <div class="col s12">
-                    <b>Bookmarks</b>
+                <ul id="last_requests_list"></ul>
+                <div id="bookmarks_tab">
                     <ul id="bookmarks_list">
-
+                    </ul>
+                    <ul>
+                        <li>
+                            <a class="btn-floating btn-small waves-light waves-effect"
+                               onclick="add_to_bookmarks();">
+                                <i class="material-icons">add</i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

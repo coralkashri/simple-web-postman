@@ -40,5 +40,7 @@ var db = {
       type: "POST",
       default_json: {}
     }
-  ]
+  ],
+  bookmarks: [],
+  last_requests: []
 };

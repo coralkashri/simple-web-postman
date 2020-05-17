@@ -38,7 +38,7 @@ function request_route_changed() {
 }
 
 function restore_request(cookies_list_name, number) {
-    let selected_request = $.cookie(cookies_list_name)[number];
+    let selected_request = db[cookies_list_name][number];
     let data = {
         origin: selected_request.origin,
         type: selected_request.type.toLowerCase(),
@@ -53,37 +53,56 @@ function restore_bookmarks_and_last_requests() {
     let last_requests = $.cookie("last_requests");
     if (!last_requests) {
         $.cookie("last_requests", [])
-    } else {
-        let last_requests_field = $("#last_requests_list");
-        last_requests_field.empty();
-        for (let i = 0; i < last_requests.length; i++) {
-            last_requests_field.prepend("<li><a onclick='restore_request(\"last_requests\", " + i + ")'>" + db.routes[Number(last_requests[i].route)].route + "</a></li>");
-        }
+    }
+    db.last_requests = last_requests || db.last_requests;
+    let last_requests_field = $("#last_requests_list");
+    last_requests_field.empty();
+    for (let i = 0; i < db.last_requests.length; i++) {
+        last_requests_field.prepend("<li><a onclick='restore_request(\"last_requests\", " + i + ")'>" + db.routes[Number(db.last_requests[i].route)].route + "</a></li>");
     }
 
     let bookmarks = $.cookie("bookmarks");
     if (!bookmarks) {
         $.cookie("bookmarks", [])
-    } else {
-        let bookmarks_field = $("#bookmarks_list");
-        bookmarks_field.empty();
-        for (let i = 0; i < bookmarks.length; i++) {
-            bookmarks_field.prepend("<li><a onclick='restore_request(\"bookmarks\", " + i + ")'>" + db.routes[Number(bookmarks[i].route)].route + "</a></li>");
-        }
+    }
+    db.bookmarks = bookmarks || db.bookmarks;
+    let bookmarks_field = $("#bookmarks_list");
+    bookmarks_field.empty();
+    for (let i = 0; i < db.bookmarks.length; i++) {
+        bookmarks_field.prepend("<li><a onclick='restore_request(\"bookmarks\", " + i + ")'>" + db.routes[Number(db.bookmarks[i].route)].route + "</a></li>");
     }
 }
 
+function set_cookie_list(cookies_list_name, value) {
+    $.cookie(cookies_list_name, value);
+    db[cookies_list_name] = value;
+}
+
 function append_request_to_cookies(cookies_list_name, request) {
-    if (!Object.keys($.cookie()).length) {
-        return;
-    }
-    let last_requests = $.cookie(cookies_list_name);
+    let last_requests = db[cookies_list_name];
     last_requests.push(request);
-    if (last_requests.length > 5) {
+    if (last_requests.length > 10) {
         last_requests.shift();
     }
-    $.cookie(cookies_list_name, last_requests);
+    set_cookie_list(cookies_list_name, last_requests);
     restore_bookmarks_and_last_requests();
+}
+
+function add_to_bookmarks() {
+    let current_value = $("#request_route").val();
+    let origin = $("#origin_target").val();
+    let method = $("#request_type").val();
+    let data = editor.getValue() ? JSON.parse(editor.getValue()) : "";
+    if (!origin || !current_value || !method) {
+        alertify.error("Please fill the request fields.");
+        return false;
+    }
+    append_request_to_cookies('bookmarks', {
+        route: current_value,
+        origin: origin,
+        type: method,
+        json: data
+    });
 }
 
 function send_request() {
@@ -95,7 +114,7 @@ function send_request() {
     request_route = "http://" + origin + '/' + request_route;
 
     if (!origin || !current_value || !method) {
-        alertify.error("Please fill the request fields.")
+        alertify.error("Please fill the request fields.");
         return false;
     }
 

@@ -37,6 +37,7 @@
             //       width: 140,
             position: "static"
         });
+        $('.tabs').tabs();
         /*$('#advanced_search_version_modal .tabs').tabs({
             onShow: () => {
                 $('#advanced_search_version_modal .tabs').tabs("select", "advanced_search_by_version");
