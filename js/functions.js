@@ -125,7 +125,7 @@ function send_request() {
         json: data
     });
 
-    $.ajax({
+    let ajax_request_data = {
         method: method,
         url:  request_route,
         data: data,
@@ -142,5 +142,13 @@ function send_request() {
             M.updateTextFields();
             M.textareaAutoResize(response_area);
         }
-    })
+    };
+
+    if (method.toLowerCase() === "get") {
+        ajax_request_data.params = data;
+    } else {
+        ajax_request_data.data = $.param(data);
+    }
+
+    $.ajax(ajax_request_data)
 }
