@@ -73,13 +73,16 @@ function change_bookmark_name(number) {
         db["bookmarks"][number].name = new_name;
         update_bookmarks_cookie_by_db();
         restore_bookmarks_and_last_requests();
+        alertify.success("Bookmark successfully renamed.");
     }
 }
 
 function remove_bookmark(number) {
     db.bookmarks.splice(number, 1);
     update_bookmarks_cookie_by_db();
+    reset_current_bookmark();
     restore_bookmarks_and_last_requests();
+    alertify.success("Bookmark successfully removed.");
 }
 
 function restore_bookmarks_and_last_requests() {
@@ -137,10 +140,12 @@ function update_or_add_bookmark(data) {
         // Update
         db["bookmarks"][current_bookmark] = data;
         update_bookmarks_cookie_by_db();
+        alertify.success("Bookmark successfully updated.");
     } else {
         // Add
         append_request_to_cookies("bookmarks", data);
         set_current_bookmark(db["bookmarks"].length - 1);
+        alertify.success("Bookmark successfully created.");
     }
     $("#bookmarks_icon").html("turned_in");
 }
