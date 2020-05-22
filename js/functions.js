@@ -76,6 +76,12 @@ function change_bookmark_name(number) {
     }
 }
 
+function remove_bookmark(number) {
+    db.bookmarks.splice(number, 1);
+    update_bookmarks_cookie_by_db();
+    restore_bookmarks_and_last_requests();
+}
+
 function restore_bookmarks_and_last_requests() {
     let last_requests = $.cookie("last_requests");
     if (!last_requests) {
@@ -104,6 +110,7 @@ function restore_bookmarks_and_last_requests() {
                     "</div>" +
                     "<div class='col s6'>" +
                         "<a onclick='change_bookmark_name(" + i + ");'><i class='material-icons'>edit</i></a>" +
+                        "<a onclick='remove_bookmark(" + i + ");'><i class='red-text material-icons'>remove</i></a>" +
                     "</div>" +
                 "</div>" +
             "</li>");
