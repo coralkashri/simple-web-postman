@@ -25,6 +25,7 @@ function set_inputs_by_selection(data) {
 }
 
 function request_route_changed() {
+    reset_current_bookmark();
     let current_value = $("#request_route").val();
     let current_data = db.routes[Number(current_value)];
 
@@ -37,8 +38,20 @@ function request_route_changed() {
     set_inputs_by_selection(data);
 }
 
+function reset_current_bookmark() {
+    current_bookmark = -1;
+    $("#bookmarks_icon").html("turned_in_not");
+}
+
+function set_current_bookmark(number) {
+    current_bookmark = number;
+    $("#bookmarks_icon").html("turned_in");
+}
+
 function restore_request(cookies_list_name, number) {
     let selected_request = db[cookies_list_name][number];
+    if (cookies_list_name === "bookmarks") set_current_bookmark(number);
+    else reset_current_bookmark();
     let data = {
         origin: selected_request.origin,
         type: selected_request.type.toLowerCase(),
@@ -88,6 +101,19 @@ function append_request_to_cookies(cookies_list_name, request) {
     restore_bookmarks_and_last_requests();
 }
 
+function update_or_add_bookmark(data) {
+    if (current_bookmark > -1) {
+        // Update
+        db["bookmarks"][current_bookmark] = data;
+        $.cookie("bookmarks", db["bookmarks"]);
+    } else {
+        // Add
+        append_request_to_cookies("bookmarks", data);
+        set_current_bookmark(db["bookmarks"].length - 1);
+    }
+    $("#bookmarks_icon").html("turned_in");
+}
+
 function add_to_bookmarks() {
     let current_value = $("#request_route").val();
     let origin = $("#origin_target").val();
@@ -97,7 +123,7 @@ function add_to_bookmarks() {
         alertify.error("Please fill the request fields.");
         return false;
     }
-    append_request_to_cookies('bookmarks', {
+    update_or_add_bookmark({
         route: current_value,
         origin: origin,
         type: method,

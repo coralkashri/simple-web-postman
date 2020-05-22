@@ -127,11 +127,11 @@
     <div style="height: 80%; padding: 0; margin: 0;" class="row">
         <div class="row col s12 vert-s3 vert-m2 vert-l1">
             <div class="col s12 m4 l3 input-field">
-                <input type="text" id="origin_target">
+                <input type="text" id="origin_target" onchange="reset_current_bookmark();">
                 <label for="origin_target">Origin</label>
             </div>
             <div class="col s12 m4 l3 input-field">
-                <select id="request_type">
+                <select id="request_type" onchange="reset_current_bookmark();">
                     <option value="" disabled selected>Select Request Type</option>
                     <option value="post">POST</option>
                     <option value="get">GET</option>
@@ -149,7 +149,7 @@
             <div class="col s12 l3 input-field">
                 <a onclick="send_request();" class="col s6 btn-small waves-effect waves-light">Send</a>
                 <a onclick="add_to_bookmarks();" style="margin-left: 8.33333%; padding-left: 8.33333%;" class="col s5 btn-small waves-effect waves-light">
-                    <i class="material-icons">bookmarks</i>
+                    <i class="material-icons" id="bookmarks_icon">turned_in_not</i>
                 </a>
             </div>
         </div>
