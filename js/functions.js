@@ -62,6 +62,20 @@ function restore_request(cookies_list_name, number) {
     update_materialize_inputs();
 }
 
+function update_bookmarks_cookie_by_db() {
+    $.cookie("bookmarks", db["bookmarks"]);
+}
+
+function change_bookmark_name(number) {
+    let current_bookmark = db["bookmarks"][number];
+    let new_name = window.prompt("Change bookmark name",current_bookmark.name);
+    if (new_name !== null && new_name !== "") {
+        db["bookmarks"][number].name = new_name;
+        update_bookmarks_cookie_by_db();
+        restore_bookmarks_and_last_requests();
+    }
+}
+
 function restore_bookmarks_and_last_requests() {
     let last_requests = $.cookie("last_requests");
     if (!last_requests) {
@@ -82,7 +96,17 @@ function restore_bookmarks_and_last_requests() {
     let bookmarks_field = $("#bookmarks_list");
     bookmarks_field.empty();
     for (let i = 0; i < db.bookmarks.length; i++) {
-        bookmarks_field.prepend("<li><a onclick='restore_request(\"bookmarks\", " + i + ")'>" + db.routes[Number(db.bookmarks[i].route)].route + "</a></li>");
+        bookmarks_field.prepend(
+            "<li>" +
+                "<div class='row'>" +
+                    "<div class='col s6'>" +
+                        "<a onclick='restore_request(\"bookmarks\", " + i + ")'>" + db.bookmarks[i].name + "</a>" +
+                    "</div>" +
+                    "<div class='col s6'>" +
+                        "<a onclick='change_bookmark_name(" + i + ");'><i class='material-icons'>edit</i></a>" +
+                    "</div>" +
+                "</div>" +
+            "</li>");
     }
 }
 
@@ -105,7 +129,7 @@ function update_or_add_bookmark(data) {
     if (current_bookmark > -1) {
         // Update
         db["bookmarks"][current_bookmark] = data;
-        $.cookie("bookmarks", db["bookmarks"]);
+        update_bookmarks_cookie_by_db();
     } else {
         // Add
         append_request_to_cookies("bookmarks", data);
@@ -127,7 +151,8 @@ function add_to_bookmarks() {
         route: current_value,
         origin: origin,
         type: method,
-        json: data
+        json: data,
+        name: db.routes[Number(current_value)].route
     });
 }
 
