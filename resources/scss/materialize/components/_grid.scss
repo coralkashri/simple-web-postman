@@ -40,7 +40,12 @@
   left: auto;
   right: auto;
 }
-@mixin grid-classes($size, $i, $perc) {
+
+@mixin horizontal-grid-classes($size, $i, $perc) {
+  &.#{$size}#{$i} {
+    width: $perc;
+    @include reset-offset;
+  }
   &.offset-#{$size}#{$i} {
     margin-left: $perc;
   }
@@ -49,6 +54,16 @@
   }
   &.push-#{$size}#{$i} {
     left: $perc;
+  }
+}
+
+@mixin vertical-grid-classes($size, $i, $perc) {
+  &.vert-#{$size}#{$i} {
+    height: $perc;
+    @include reset-offset;
+  }
+  &.vert-offset-#{$size}#{$i} {
+    //padding-top: $perc; // padding-top / margin-top are relative to parent's width
   }
 }
 
@@ -71,101 +86,79 @@
     padding: 0 $gutter-width / 2;
     min-height: 1px;
 
-    // Grid doc styles
-
-    &.grid-example {
-      border: 3px solid;
-      //margin: 7px 0;
-      text-align: center;
-      //line-height: 50px;
-      //font-size: 28px;
-      color: white;
-      padding: 0;
-
-      span {
-        font-weight: 100;
-        line-height: 50px;
-      }
-    }
-
     &[class*="push-"],
     &[class*="pull-"] {
       position: relative;
     }
 
-    $i: 1;
-    @while $i <= $num-cols {
-      $perc: unquote((100 / ($num-cols / $i)) + "%");
-      &.s#{$i} {
-        width: $perc;
-        @include reset-offset;
-      }
-      $i: $i + 1;
-    }
+    // Horizontal
 
     $i: 1;
     @while $i <= $num-cols {
       $perc: unquote((100 / ($num-cols / $i)) + "%");
-      @include grid-classes("s", $i, $perc);
+      @include horizontal-grid-classes("s", $i, $perc);
       $i: $i + 1;
     }
 
     @media #{$medium-and-up} {
-
       $i: 1;
       @while $i <= $num-cols {
         $perc: unquote((100 / ($num-cols / $i)) + "%");
-        &.m#{$i} {
-          width: $perc;
-          @include reset-offset;
-        }
-        $i: $i + 1
-      }
-
-      $i: 1;
-      @while $i <= $num-cols {
-        $perc: unquote((100 / ($num-cols / $i)) + "%");
-        @include grid-classes("m", $i, $perc);
+        @include horizontal-grid-classes("m", $i, $perc);
         $i: $i + 1;
       }
     }
 
     @media #{$large-and-up} {
-
       $i: 1;
       @while $i <= $num-cols {
         $perc: unquote((100 / ($num-cols / $i)) + "%");
-        &.l#{$i} {
-          width: $perc;
-          @include reset-offset;
-        }
-        $i: $i + 1;
-      }
-
-      $i: 1;
-      @while $i <= $num-cols {
-        $perc: unquote((100 / ($num-cols / $i)) + "%");
-        @include grid-classes("l", $i, $perc);
+        @include horizontal-grid-classes("l", $i, $perc);
         $i: $i + 1;
       }
     }
 
     @media #{$extra-large-and-up} {
-
       $i: 1;
       @while $i <= $num-cols {
         $perc: unquote((100 / ($num-cols / $i)) + "%");
-        &.xl#{$i} {
-          width: $perc;
-          @include reset-offset;
-        }
+        @include horizontal-grid-classes("xl", $i, $perc);
         $i: $i + 1;
       }
+    }
 
+    // Vertical
+
+    $i: 1;
+    @while $i <= $num-cols {
+      $perc: unquote((100 / ($num-cols / $i)) + "%");
+      @include vertical-grid-classes("s", $i, $perc);
+      $i: $i + 1;
+    }
+
+    @media #{$medium-height-and-up} {
       $i: 1;
       @while $i <= $num-cols {
         $perc: unquote((100 / ($num-cols / $i)) + "%");
-        @include grid-classes("xl", $i, $perc);
+        @include vertical-grid-classes("m", $i, $perc);
+        $i: $i + 1;
+      }
+    }
+
+    @media #{$large-height-and-up} {
+      $i: 1;
+      @while $i <= $num-cols {
+        $perc: unquote((100 / ($num-cols / $i)) + "%");
+        @include vertical-grid-classes("l", $i, $perc);
+        $i: $i + 1;
+      }
+    }
+
+    @media #{$extra-large-height-and-up} {
+      $i: 1;
+      @while $i <= $num-cols {
+        $perc: unquote((100 / ($num-cols / $i)) + "%");
+        @include vertical-grid-classes("xl", $i, $perc);
         $i: $i + 1;
       }
     }

@@ -81,7 +81,7 @@ function set_cookie_list(cookies_list_name, value) {
 function append_request_to_cookies(cookies_list_name, request) {
     let last_requests = db[cookies_list_name];
     last_requests.push(request);
-    if (last_requests.length > 10) {
+    if (cookies_list_name === "last_requests" && last_requests.length > db.lists_capacity) {
         last_requests.shift();
     }
     set_cookie_list(cookies_list_name, last_requests);

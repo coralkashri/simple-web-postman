@@ -124,68 +124,64 @@
     <br><br><br><br>
 
     <!--Content Comes Here-->
-    <div class="row">
-        <div class="col s12 m4 l3 input-field">
-            <input type="text" id="origin_target">
-            <label for="origin_target">Origin</label>
+    <div style="height: 80%; padding: 0; margin: 0;" class="row">
+        <div class="row col s12 vert-s3 vert-m2 vert-l1">
+            <div class="col s12 m4 l3 input-field">
+                <input type="text" id="origin_target">
+                <label for="origin_target">Origin</label>
+            </div>
+            <div class="col s12 m4 l3 input-field">
+                <select id="request_type">
+                    <option value="" disabled selected>Select Request Type</option>
+                    <option value="post">POST</option>
+                    <option value="get">GET</option>
+                    <option value="put">PUT</option>
+                    <option value="delete">DELETE</option>
+                </select>
+                <label for="request_type">Request Type</label>
+            </div>
+            <div class="col s12 m4 l3 input-field">
+                <select id="request_route" onchange="request_route_changed();">
+                    <option value="" disabled selected>Select Request Route</option>
+                </select>
+                <label for="request_route">Request Route</label>
+            </div>
+            <div class="col s12 l3 input-field">
+                <a onclick="send_request();" class="col s6 btn-small waves-effect waves-light">Send</a>
+                <a onclick="add_to_bookmarks();" style="margin-left: 8.33333%; padding-left: 8.33333%;" class="col s5 btn-small waves-effect waves-light">
+                    <i class="material-icons">bookmarks</i>
+                </a>
+            </div>
         </div>
-        <div class="col s12 m4 l3 input-field">
-            <select id="request_type">
-                <option value="" disabled selected>Select Request Type</option>
-                <option value="post">POST</option>
-                <option value="get">GET</option>
-                <option value="put">PUT</option>
-                <option value="delete">DELETE</option>
-            </select>
-            <label for="request_type">Request Type</label>
-        </div>
-        <div class="col s12 m4 l3 input-field">
-            <select id="request_route" onchange="request_route_changed();">
-                <option value="" disabled selected>Select Request Route</option>
-            </select>
-            <label for="request_route">Request Route</label>
-        </div>
-        <div class="col s12 l3 input-field">
-            <a onclick="send_request();" class="col s12 btn-small waves-effect waves-light">Send</a>
-        </div>
-    </div>
 
-    <div class="row center">
-        <div class="col s12">
-            <!--Last Requests-->
-            <div class="row col s12 l3">
-                <div class="col s12">
-                    <ul class="tabs">
-                        <li class="tab col s6"><a href="#last_requests_list">Last Requests</a></li>
-                        <li class="tab col s6"><a class="active" href="#bookmarks_tab">Bookmarks</a></li>
-                    </ul>
-                    <br>
+        <div class="row col s12 vert-s8 vert-m9 vert-l10 center">
+            <div class="col s12 vert-s12">
+                <!--Last Requests-->
+                <div class="row col s12 l3 vert-s12">
+                    <div class="col s12">
+                        <ul class="tabs">
+                            <li class="tab col s6"><a href="#last_requests_tab" class="active">Last Requests</a></li>
+                            <li class="tab col s6"><a class="active" href="#bookmarks_tab">Bookmarks</a></li>
+                        </ul>
+                        <br>
+                    </div>
+                    <div id="last_requests_tab">
+                        <ul id="last_requests_list" style="height: 100%; display: block;"></ul>
+                    </div>
+                    <div id="bookmarks_tab" style="height: 100%;">
+                        <ul id="bookmarks_list" style="overflow-y: auto;"></ul>
+                    </div>
                 </div>
-                <ul id="last_requests_list"></ul>
-                <div id="bookmarks_tab">
-                    <ul id="bookmarks_list">
-                    </ul>
-                    <ul>
-                        <li>
-                            <a class="btn-floating btn-small waves-light waves-effect"
-                               onclick="add_to_bookmarks();">
-                                <i class="material-icons">add</i>
-                            </a>
-                        </li>
-                    </ul>
+
+                <!--JSON-->
+                <div class="col s1 show-on-medium-and-down hide-on-large-only"></div>
+                <div id="ace-editor" class='col s10 l8 vert-s6 ace-editor'></div>
+
+                <div class="col offset-s1 s10 l8 vert-s6 input-field">
+                    <textarea id="response" disabled class="materialize-textarea"></textarea>
+                    <label for="response">Response</label>
                 </div>
             </div>
-
-            <!--JSON-->
-            <div class="col s1 show-on-medium-and-down hide-on-large-only"></div>
-            <div id="ace-editor" class='col s10 l8 ace-editor'></div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col offset-s1 s10 input-field">
-            <textarea id="response" disabled class="materialize-textarea"></textarea>
-            <label for="response">Response</label>
         </div>
     </div>
 </body>

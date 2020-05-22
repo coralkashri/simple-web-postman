@@ -4141,7 +4141,7 @@ $jscomp.polyfill = function (e, r, p, m) {
           }
         } else {
           if (this.$content.length) {
-            this.$content[0].style.display = 'block';
+            this.$content[0].style.display = 'inline-grid'; // Enable overflow-y inside the element -- Korel
             this.$content.addClass('active');
             if (typeof this.options.onShow === 'function') {
               this.options.onShow.call(this, this.$content[0]);

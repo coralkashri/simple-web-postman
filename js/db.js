@@ -42,5 +42,6 @@ var db = {
     }
   ],
   bookmarks: [],
-  last_requests: []
+  last_requests: [],
+  lists_capacity: 10 // 0 -> infinity
 };
