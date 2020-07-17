@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Korel Kashri">
+
+    <!--Resources-->
+    <!--Styles-->
+    <link rel="stylesheet" href="resources/css/materialize.css" />
+    <link rel="stylesheet" href="resources/css/primer.css" />
+    <link rel="stylesheet" href="resources/css/material-icons.css" />
+    <link rel="stylesheet" href="resources/css/alertify.core.css" />
+    <link rel="stylesheet" href="resources/css/alertify.bootstrap.css" />
+    <link rel="stylesheet" href="resources/css/fontawesome.min.css" />
+
+    <!--Scripts-->
+    <script type="text/javascript" src="resources/js/jQuery.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="resources/js/materialize.js"></script>
+    <script type="text/javascript" src="resources/js/alertify.js"></script>
+    <script type="text/javascript" src="resources/js/moment.min.js"></script>
+    <script type="text/javascript" src="resources/js/ace/src-min-noconflict/ace.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
+
+    <!--Custom-->
+    <!--Styles-->
+    <link rel="stylesheet" href="css/index.css" />
+
+    <!--Scripts-->
+    <script type="text/javascript" src="js/variables.js"></script>
+    <script type="text/javascript" src="js/db.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/automations_functions.js"></script>
+    <title>Automations</title>
+</head>
+<body>
+    <!--NavBar-->
+    <div class="dismiss_area"></div>
+
+    <!--Preloader-->
+    <div class="preloader-wrapper big circular-preloader">
+        <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+
+        <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+
+        <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+    </div>
+
+    <!--Side NavBar-->
+    <ul id="slide-out" class="sidenav left-aligned flow-text">
+        <li>
+            <div style="display: flex; align-items: center;" class="user-view"></div>
+        </li>
+        <li>
+            <a href="index.html"><i class="fa fa-envelope"></i>Postman</a>
+        </li>
+        <li>
+            <a href="automations.html"><i class="fa fa-envelope"></i>Automations</a>
+        </li>
+        <!--<li>
+            <a href="admin_panel.html"><i class="fa fa-toolbox"></i>Admin Panel</a>
+        </li>-->
+    </ul>
+
+    <!--Top NavBar-->
+    <div id="page_sticky_header" class="sticky-action">
+        <div class="row" ng-hide="version_edit_progress.is_active">
+            <div style="position: fixed; margin-left: 1rem;" class="left" id="side-nav-button">
+                <a href="#" data-target="slide-out" class="sidenav-trigger">
+                    <div class="menu-icon-2">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </div>
+
+            <span class="hide-on-med-and-down">
+                    <div class="col s10 offset-s1 center">
+                        <a style="font-size: 43px;" href="/automations.html">Automations</a>
+                    </div>
+                </span>
+        </div>
+        <div class="nav-content">
+        </div>
+    </div>
+
+    <br><br><br><br>
+
+    <!--Content Comes Here-->
+    <div style="height: 80%; padding: 0; margin: 0;" class="row">
+        <div class="row col s12 vert-s8 vert-m9 vert-l10 center">
+            <div class="col s12">
+                <!--Last Requests / Bookmarks-->
+                <div class="row col s12 l3 vert-s12">
+                    <div class="col s12">
+                        <ul class="tabs">
+                            <li class="tab col s12"><a href="#automations_tab" class="active">Automations</a></li>
+                        </ul>
+                        <br>
+                    </div>
+                    <div id="automations_tab" style="width: 100%;">
+                        <ul id="last_requests_list" style="height: 100%; display: block;"></ul>
+                        <a class="btn-floating btn-small waves-effect" onclick="new_automation_form();">
+                            <i class="material-icons">add</i>
+                        </a>
+                    </div>
+                </div>
+
+                <!--Template Action Type Selection-->
+                <div id="template_automation_action_type_selection" class="hide col s12 l2 input-field">
+                    <select id="action_type" onchange="change_new_automation_action();">
+                        <option value="" disabled selected>Action</option>
+                        <option value="sync_request">Sync Request</option>
+                        <option value="async_request">Async Request</option>
+                        <option value="sleep">Sleep</option>
+                        <option value="stop_condition">Stop Condition</option>
+                    </select>
+                    <label for="action_type">Select Action</label>
+                </div>
+
+                <!--Template Stop Condition-->
+                <div id="template_automation_stop_condition_action" class="hide row col s12 l6">
+                    <div class="col s12 l5 input-field">
+                        <select id="stop_condition_type">
+                            <option selected value="response_status">On response status</option>
+                            <option value="response_message">On response message</option>
+                            <option value="timeout">On timeout</option>
+                        </select>
+                        <label for="stop_condition_type">Stop Condition Type</label>
+                    </div>
+
+                    <div id="on_status" class="col s12 l5 input-field">
+                        <select id="status">
+                            <option selected value="0">No Server Response</option>
+                            <option value="200">Success</option>
+                            <option value="400">Error</option>
+                        </select>
+                        <label for="status">Status</label>
+                    </div>
+
+                    <div id="on_response" class="hide col s12 l5 input-field">
+                        <textarea id="response" class="materialize-textarea"></textarea>
+                        <label for="response">Response</label>
+                    </div>
+
+                    <div id="on_timeout" class="hide col s12 l6">
+                        <div class="col s12 m6 input-field">
+                            <input type="number" min="0.1" id="timeout" onchange="if (this.value < this.min) this.value = this.min;">
+                            <label for="timeout">Timeout</label>
+                        </div>
+
+                        <div class="col s12 m6 input-field">
+                            <select id="timeout_units">
+                                <option value="60000">Minutes</option>
+                                <option selected value="1000">Seconds</option>
+                                <option value="1">Milliseconds</option>
+                            </select>
+                            <label for="timeout_units">Units</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Template Sleep-->
+                <div id="template_automation_sleep_action" class="hide row col s12 l6">
+                    <div class="col s12 m8 l3 input-field">
+                        <input type="number" min="0.1" id="sleep_for" onchange="if (this.value < this.min) this.value = this.min;">
+                        <label for="sleep_for">Sleep For</label>
+                    </div>
+
+                    <div class="col s12 l3 input-field">
+                        <select id="sleep_for_units">
+                            <option value="60000">Minutes</option>
+                            <option selected value="1000">Seconds</option>
+                            <option value="1">Milliseconds</option>
+                        </select>
+                        <label for="sleep_for_units">Units</label>
+                    </div>
+                </div>
+
+                <!--Template Request-->
+                <div id="template_automation_request_action" class="hide row col s12 l6">
+                    <div class="row col s12 vert-s3 vert-m2 vert-l1">
+                        <div class="col s12 m4 l3 input-field">
+                            <input type="text" id="origin_target" onchange="reset_current_bookmark();">
+                            <label for="origin_target">Origin</label>
+                        </div>
+                        <div class="col s12 m4 l3 input-field">
+                            <select id="request_type" onchange="reset_current_bookmark();">
+                                <option value="" disabled selected>Request Type</option>
+                                <option value="post">POST</option>
+                                <option value="get">GET</option>
+                                <option value="put">PUT</option>
+                                <option value="delete">DELETE</option>
+                            </select>
+                            <label for="request_type">Request Type</label>
+                        </div>
+                        <div class="col s12 m4 l3 input-field">
+                            <select id="request_route" onchange="request_route_changed();">
+                                <option value="" disabled selected>Request Route</option>
+                            </select>
+                            <label for="request_route">Request Route</label>
+                        </div>
+                        <div class="col s12 l3 input-field">
+                            <a onclick="test_request();" class="col s12 btn-small waves-effect waves-light">Test Request</a>
+                        </div>
+                    </div>
+
+                    <!--JSON-->
+                    <div id="ace-editor" class='col offset-s1 s10 ace-editor'></div>
+
+                    <div class="col s12 input-field">
+                        <textarea id="test_response" disabled class="materialize-textarea"></textarea>
+                        <label for="test_response">Test Response</label>
+                    </div>
+                </div>
+
+                <!--Template Add Action Button-->
+                <div id="template_automation_add_action_button" class="hide row col s12">
+                    <a class="btn-small" onclick="add_automation_action();">New Action</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
