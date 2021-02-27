@@ -191,7 +191,6 @@ function send_request() {
     let ajax_request_data = {
         method: method,
         url:  request_route,
-        data: data,
         success: (data, textStatus, request) => {
         },
         error: (data, textStatus, request) => {
@@ -210,8 +209,9 @@ function send_request() {
     if (method.toLowerCase() === "get") {
         ajax_request_data.params = data;
     } else {
-        ajax_request_data.data = $.param(data);
+        console.log(JSON.stringify(data));
+        ajax_request_data.data = JSON.stringify(data);
     }
 
-    $.ajax(ajax_request_data)
+    $.ajax(ajax_request_data);
 }

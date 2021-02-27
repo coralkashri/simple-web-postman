@@ -1,6 +1,6 @@
 var db = {
   routes: [
-    {
+    /*{
       origin: "localhost:8080",
       route: "performAction/initParams",
       type: "POST",
@@ -39,7 +39,35 @@ var db = {
       route: "CloseServer",
       type: "POST",
       default_json: {}
-    }
+    }*/
+    {
+      origin: "localhost:8080",
+      route: "system_health_monitor_allocate_mission",
+      type: "POST",
+      default_json: {
+        "leader_id": 5,
+        "self_id": 10,
+        "dependencies": [11, 12, 13, 14]
+      }
+    }, {
+      origin: "localhost:8080",
+      route: "system_health_monitor_release_mission",
+      type: "POST",
+      default_json: {
+      }
+    }, {
+      origin: "localhost:8080",
+      route: "system_health_monitor_is_id_accessible",
+      type: "GET",
+      default_json: {
+      }
+    }, {
+      origin: "localhost:8080",
+      route: "system_health_monitor_change_mission_state",
+      type: "POST",
+      default_json: {
+      }
+    },
   ],
   bookmarks: [],
   last_requests: [],
