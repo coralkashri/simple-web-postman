@@ -189,8 +189,9 @@ function send_request() {
     });
 
     let ajax_request_data = {
-        method: method,
+        type: method,
         url:  request_route,
+        dataType: 'json',
         success: (data, textStatus, request) => {
         },
         error: (data, textStatus, request) => {
@@ -206,12 +207,11 @@ function send_request() {
         }
     };
 
-    if (method.toLowerCase() === "get") {
-        ajax_request_data.params = data;
-    } else {
-        console.log(JSON.stringify(data));
-        ajax_request_data.data = JSON.stringify(data);
+    if (method.toLowerCase() !== "get") {
+        data = JSON.stringify(data);
     }
+
+    ajax_request_data.data = data;
 
     $.ajax(ajax_request_data);
 }

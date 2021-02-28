@@ -54,18 +54,22 @@ var db = {
       route: "system_health_monitor_release_mission",
       type: "POST",
       default_json: {
+        "leader_id": 5
       }
     }, {
       origin: "localhost:8080",
       route: "system_health_monitor_is_id_accessible",
       type: "GET",
       default_json: {
+        "leader_id": 5
       }
     }, {
       origin: "localhost:8080",
       route: "system_health_monitor_change_mission_state",
       type: "POST",
       default_json: {
+        "leader_id": 5,
+        "state": 2
       }
     },
   ],
