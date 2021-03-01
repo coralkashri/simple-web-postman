@@ -71,6 +71,15 @@ var db = {
         "leader_id": 5,
         "state": 2
       }
+    }, {
+      origin: "localhost:8080",
+      route: "system_health_monitor_failed_mission",
+      type: "POST",
+      default_json: {
+        "id": 5,
+        "failure_message": "Error occurred",
+        "should_restart": false
+      }
     },
   ],
   bookmarks: [],
