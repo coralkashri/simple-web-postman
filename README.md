@@ -6,3 +6,6 @@ DB is located in file: `js/db.js`.<br>
 
 ### Cookies
 To enable cookies feature you have to upload those files to your server and communicate with it using `your_server_ip:port/index.html`.
+
+## Configuration
+In index.html & automations.html include the relevant db.js script.
