@@ -67,6 +67,12 @@ var db = {
       type: "POST",
       default_json: {
       }
+    }, {
+      origin: "localhost:8080",
+      route: "upload_file",
+      type: "POST",
+      default_json: {
+      }
     },
   ],
   bookmarks: [],

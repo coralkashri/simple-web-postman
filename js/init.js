@@ -152,6 +152,17 @@
         restore_bookmarks_and_last_requests();
     }
 
+    function initialize_file_input() {
+        $('#file_to_upload').change(function() {
+            //on change event
+            form_data = new FormData();
+            if ($(this).prop('files').length > 0) {
+                let file = $(this).prop('files')[0];
+                form_data.append("custom_files", file);
+            }
+        });
+    }
+
     function init_all() {
         read_db();
         initialize_cookies();
@@ -161,6 +172,7 @@
         init_scroll();
         init_dismiss_area();
         init_sidenav();
+        initialize_file_input();
     }
 
     $(document).ready(function(){

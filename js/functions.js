@@ -173,7 +173,7 @@ function send_request() {
     let origin = $("#origin_target").val();
     let request_route = db.routes[Number(current_value)].route;
     let method = $("#request_type").val();
-    let data = editor.getValue() ? JSON.parse(editor.getValue()) : "";
+    let data = form_data != null ? form_data : editor.getValue() ? JSON.parse(editor.getValue()) : "";
     request_route = "http://" + origin + '/' + request_route;
 
     if (!origin || !current_value || !method) {
@@ -209,8 +209,13 @@ function send_request() {
     if (method.toLowerCase() === "get") {
         ajax_request_data.params = data;
     } else {
-        console.log(JSON.stringify(data));
-        ajax_request_data.data = JSON.stringify(data);
+        if (form_data === null) {
+            ajax_request_data.data = JSON.stringify(data);
+        } else {
+            ajax_request_data.data = data;
+            ajax_request_data.contentType = false;
+            ajax_request_data.processData = false;
+        }
     }
 
     $.ajax(ajax_request_data);
