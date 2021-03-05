@@ -189,8 +189,9 @@ function send_request() {
     });
 
     let ajax_request_data = {
-        method: method,
+        type: method,
         url:  request_route,
+        dataType: 'json',
         success: (data, textStatus, request) => {
         },
         error: (data, textStatus, request) => {
@@ -206,17 +207,16 @@ function send_request() {
         }
     };
 
-    if (method.toLowerCase() === "get") {
-        ajax_request_data.params = data;
-    } else {
+    if (method.toLowerCase() !== "get") {
         if (form_data === null) {
-            ajax_request_data.data = JSON.stringify(data);
+            data = JSON.stringify(data);
         } else {
-            ajax_request_data.data = data;
             ajax_request_data.contentType = false;
             ajax_request_data.processData = false;
         }
     }
+
+    ajax_request_data.data = data;
 
     $.ajax(ajax_request_data);
 }

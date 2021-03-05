@@ -54,16 +54,41 @@ var db = {
       route: "system_health_monitor_release_mission",
       type: "POST",
       default_json: {
+        "leader_id": 5
       }
     }, {
       origin: "localhost:8080",
       route: "system_health_monitor_is_id_accessible",
       type: "GET",
       default_json: {
+        "leader_id": 5
       }
     }, {
       origin: "localhost:8080",
       route: "system_health_monitor_change_mission_state",
+      type: "POST",
+      default_json: {
+        "leader_id": 5,
+        "state": 2
+      }
+    }, {
+      origin: "localhost:8080",
+      route: "system_health_monitor_failed_mission",
+      type: "POST",
+      default_json: {
+        "id": 5,
+        "failure_message": "Error occurred",
+        "should_restart": false
+      }
+    }, {
+      origin: "localhost:8080",
+      route: "get_and_remove_failed_missions",
+      type: "POST",
+      default_json: {
+      }
+    }, {
+      origin: "localhost:8080",
+      route: "get_active_missions",
       type: "POST",
       default_json: {
       }
