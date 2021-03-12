@@ -168,6 +168,13 @@ function add_to_bookmarks() {
     });
 }
 
+function update_response_area(data) {
+    let response_area = $("#response");
+    response_area.val(data);
+    M.updateTextFields();
+    M.textareaAutoResize(response_area);
+}
+
 function send_request() {
     let current_value = $("#request_route").val();
     let origin = $("#origin_target").val();
@@ -180,6 +187,8 @@ function send_request() {
         alertify.error("Please fill the request fields.");
         return false;
     }
+
+    update_response_area("Waiting for response...");
 
     append_request_to_cookies('last_requests', {
         route: current_value,
@@ -197,13 +206,10 @@ function send_request() {
         error: (data, textStatus, request) => {
         },
         complete: (data, textStatus, request) => {
-            let response_area = $("#response");
             let response = moment().format('DD/MM/YYYY HH:mm:ss') + " Status: " + textStatus + " - " + data.status + "\n\n";
             if (!data.responseText) data.responseText = "No Server Response";
             response += data.responseText;
-            response_area.val(response);
-            M.updateTextFields();
-            M.textareaAutoResize(response_area);
+            update_response_area(response);
         }
     };
 
