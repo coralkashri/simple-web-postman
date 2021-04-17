@@ -109,7 +109,7 @@ function restore_bookmarks_and_last_requests() {
             "<li>" +
                 "<div class='row'>" +
                     "<div class='col s6'>" +
-                        "<a onclick='restore_request(\"bookmarks\", " + i + ")'>" + db.bookmarks[i].name + "</a>" +
+                        "<a onclick='restore_request(\"bookmarks\", " + i + ")' style='cursor: pointer;'>" + db.bookmarks[i].name + "</a>" +
                     "</div>" +
                     "<div class='col s6'>" +
                         "<a onclick='change_bookmark_name(" + i + ");'><i class='material-icons'>edit</i></a>" +

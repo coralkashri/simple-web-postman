@@ -1,0 +1,23 @@
+{
+  "name": "web-postman",
+  "version": "1.0.0",
+  "description": "Web application for postman tool.<br> No server needed - Just open index.html.<br> DB is located in file: `js/db.js`.<br> **Compatible with offline systems**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/korelkashri/web-postman.git"
+  },
+  "author": "Koral Kashri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/korelkashri/web-postman/issues"
+  },
+  "homepage": "https://github.com/korelkashri/web-postman#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  }
+}
