@@ -108,10 +108,10 @@ function restore_bookmarks_and_last_requests() {
         bookmarks_field.prepend(
             "<li>" +
                 "<div class='row'>" +
-                    "<div class='col s6'>" +
+                    "<div class='col s9' style='overflow-x: auto;'>" +
                         "<a onclick='restore_request(\"bookmarks\", " + i + ")' style='cursor: pointer;'>" + db.bookmarks[i].name + "</a>" +
                     "</div>" +
-                    "<div class='col s6'>" +
+                    "<div class='col s3'>" +
                         "<a onclick='change_bookmark_name(" + i + ");'><i class='material-icons'>edit</i></a>" +
                         "<a onclick='remove_bookmark(" + i + ");'><i class='red-text material-icons'>remove</i></a>" +
                     "</div>" +
@@ -138,7 +138,12 @@ function append_request_to_cookies(cookies_list_name, request) {
 function update_or_add_bookmark(data) {
     if (current_bookmark > -1) {
         // Update
-        db["bookmarks"][current_bookmark] = data;
+        // data.name = db["bookmarks"][current_bookmark].name;
+        delete data.name;
+        db["bookmarks"][current_bookmark] = {
+            ...db["bookmarks"][current_bookmark],
+            data
+        };
         update_bookmarks_cookie_by_db();
         alertify.success("Bookmark successfully updated.");
     } else {
